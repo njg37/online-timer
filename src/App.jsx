@@ -11,13 +11,30 @@ function App() {
     <div className="app-container">
       <h1>⏱ Online Timer Tool</h1>
 
+      {/* Navigation */}
       <div className="nav">
-        <button onClick={() => setView("timer")}>Timer</button>
-        <button onClick={() => setView("stopwatch")}>Stopwatch</button>
-        <button onClick={() => setView("alarm")}>Alarm</button>
+        <button
+          className={view === "timer" ? "active" : ""}
+          onClick={() => setView("timer")}
+        >
+          Timer
+        </button>
+        <button
+          className={view === "stopwatch" ? "active" : ""}
+          onClick={() => setView("stopwatch")}
+        >
+          Stopwatch
+        </button>
+        <button
+          className={view === "alarm" ? "active" : ""}
+          onClick={() => setView("alarm")}
+        >
+          Alarm
+        </button>
       </div>
 
-      <div className="view">
+      {/* Tool View */}
+      <div className="view tool-card">
         {view === "timer" && <Timer />}
         {view === "stopwatch" && <Stopwatch />}
         {view === "alarm" && <Alarm />}

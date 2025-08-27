@@ -14,18 +14,46 @@ body {
   margin: 1rem 0;
 }
 
+/* Default button */
 button {
   margin: 0 0.5rem;
   padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 20px; /* rounded pills for nav/buttons */
   cursor: pointer;
   background: #007bff;
   color: white;
   font-size: 1rem;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background: #0056b3;
+}
+
+/* Active navigation tab */
+.nav button.active {
+  background: #0056b3;
+  transform: scale(1.05);
+  font-weight: bold;
+}
+
+/* Card wrapper for each tool */
+.tool-card {
+  background: white;
+  padding: 2rem;
+  margin: 1rem auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+}
+
+/* Style inputs globally */
+input[type="number"],
+input[type="time"] {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-right: 0.5rem;
 }

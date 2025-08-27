@@ -1,0 +1,32 @@
+.stopwatch-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.stopwatch-display {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.stopwatch-buttons button {
+  margin: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #28a745;
+  color: white;
+  transition: 0.3s;
+}
+
+.stopwatch-buttons button:hover {
+  background: #1e7e34;
+}
+
+.laps {
+  margin-top: 1rem;
+  text-align: left;
+  max-width: 300px;
+  margin-inline: auto;
+}
