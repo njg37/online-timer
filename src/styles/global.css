@@ -1,13 +1,32 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f9f9f9;
+  /* Gradient background */
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: #333;
+  transition: background 1s ease-in-out; /* smooth bg transitions */
 }
 
 .app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Center vertically */
   text-align: center;
   padding: 2rem;
+}
+
+/* Smooth fade + slide transition for pages */
+.page-transition {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.page-transition.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .nav {

@@ -1,19 +1,50 @@
 .alarm-container {
   text-align: center;
+  margin-top: 1.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.alarm-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
   margin-top: 1rem;
 }
 
 .alarm-buttons button {
-  margin: 0.5rem;
-  padding: 0.6rem 1.2rem;
+  padding: 0.7rem 1.4rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  background: #dc3545;
+  background: linear-gradient(135deg, #dc3545, #b02a37);
   color: white;
-  transition: 0.3s;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
 }
 
 .alarm-buttons button:hover {
-  background: #a71d2a;
+  background: linear-gradient(135deg, #b02a37, #7a1c25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.alarm-buttons button:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.alarm-buttons button:focus {
+  outline: 2px solid #ff6b81;
+  outline-offset: 3px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .alarm-buttons button {
+    width: 100%;
+    font-size: 0.95rem;
+  }
 }
