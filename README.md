@@ -6,7 +6,7 @@ Welcome to the **Online Timer Tool**, a lightweight and modern React app powered
 
 ## 🚀 Live Demo
 
-👉 [View Deployed Dashboard](https://online-timer-ten.vercel.app/)
+👉 [View](https://online-timer-ten.vercel.app/)
 
 ## ✨ Features
 
