@@ -1,3 +1,4 @@
+/* === Base Styles (Unchanged) === */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -63,7 +64,7 @@ button:hover {
   padding: 2rem;
   margin: 1rem auto;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(208, 176, 176, 0.1);
   max-width: 400px;
 }
 
@@ -75,4 +76,79 @@ input[type="time"] {
   border: 1px solid #ccc;
   font-size: 1rem;
   margin-right: 0.5rem;
+}
+
+/* === Theme Support === */
+body.light {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #333;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  color: #f1f1f1;
+}
+
+/* Dark mode card style */
+body.dark .tool-card {
+  background: #2a2a40;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  color: #f1f1f1;
+}
+
+/* Input styling in dark mode */
+body.dark input,
+body.dark input[type="time"],
+body.dark input[type="number"] {
+  background: #444;
+  color: #fff;
+  border: 1px solid #666;
+}
+
+/* Button styling in dark mode */
+body.dark button {
+  background: #444;
+  color: #f1f1f1;
+}
+
+body.dark button:hover {
+  background: #666;
+}
+
+/* Active button in dark mode */
+body.dark .nav button.active {
+  background: #222;
+}
+
+/* === Theme Toggle Button (with animation) === */
+.theme-toggle {
+  background: transparent;
+  color: inherit;
+  border: 2px solid currentColor;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Header flex container */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
