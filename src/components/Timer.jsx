@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import "../styles/Timer.css"
+import "../styles/timer.css";
 
 function Timer() {
-  const [time, setTime] = useState(60);        // countdown time in seconds
+  const [time, setTime] = useState(60); // countdown time in seconds
   const [inputTime, setInputTime] = useState(60); // input field value
   const [isActive, setIsActive] = useState(false);
   const timerRef = useRef(null);
+
+  // Circle progress
+  const radius = 90;
+  const circumference = 2 * Math.PI * radius;
 
   // Start countdown
   const startTimer = () => {
@@ -43,7 +47,6 @@ function Timer() {
     const audioFile = "/alarm.mp3"; // place alarm.mp3 in public/
     const audio = new Audio(audioFile);
     audio.play().catch(() => {
-      // If file not found or autoplay blocked → fallback beep
       playBeep();
     });
   };
@@ -54,15 +57,15 @@ function Timer() {
     const oscillator = ctx.createOscillator();
     const gainNode = ctx.createGain();
 
-    oscillator.type = "sine"; // sound type
-    oscillator.frequency.setValueAtTime(1000, ctx.currentTime); // 1kHz tone
-    gainNode.gain.setValueAtTime(0.1, ctx.currentTime); // volume
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(1000, ctx.currentTime);
+    gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
 
     oscillator.connect(gainNode);
     gainNode.connect(ctx.destination);
 
     oscillator.start();
-    oscillator.stop(ctx.currentTime + 1); // play 1 sec
+    oscillator.stop(ctx.currentTime + 1);
   };
 
   // Cleanup on unmount
@@ -77,8 +80,20 @@ function Timer() {
     return `${m}:${s}`;
   };
 
+  // Circle progress calculation
+  const progress =
+    time > 0 ? ((inputTime - time) / inputTime) * circumference : circumference;
+
+  // Dynamic color (Green → Yellow → Red)
+  const getColor = () => {
+    const ratio = time / inputTime;
+    if (ratio > 0.6) return "#22c55e"; // green
+    if (ratio > 0.3) return "#eab308"; // yellow
+    return "#ef4444"; // red
+  };
+
   return (
-    <div>
+    <div className="timer-container">
       <h2>⏲ Countdown Timer</h2>
 
       {/* Input to set custom seconds */}
@@ -90,19 +105,47 @@ function Timer() {
           onChange={(e) => setInputTime(Number(e.target.value))}
           disabled={isActive}
         />
-        <button
-          onClick={() => setTime(inputTime)}
-          disabled={isActive}
-        >
+        <button onClick={() => setTime(inputTime)} disabled={isActive}>
           Set Time
         </button>
       </div>
 
-      <h1>{formatTime(time)}</h1>
+      {/* Countdown Circle */}
+      <div className="circle-wrapper">
+        <svg className="progress-ring" width="220" height="220">
+          <circle
+            className="progress-ring__circle--bg"
+            stroke="#ddd"
+            strokeWidth="10"
+            fill="transparent"
+            r={radius}
+            cx="110"
+            cy="110"
+          />
+          <circle
+            className="progress-ring__circle"
+            stroke={getColor()}
+            strokeWidth="10"
+            fill="transparent"
+            r={radius}
+            cx="110"
+            cy="110"
+            strokeDasharray={circumference}
+            strokeDashoffset={progress}
+          />
+        </svg>
 
-      <div>
-        <button onClick={startTimer} disabled={isActive}>Start</button>
-        <button onClick={stopTimer} disabled={!isActive}>Stop</button>
+        <div className="timer-text">{formatTime(time)}</div>
+      </div>
+
+      {/* Buttons */}
+      <div className="timer-buttons">
+        <button onClick={startTimer} disabled={isActive}>
+          Start
+        </button>
+        <button onClick={stopTimer} disabled={!isActive}>
+          Stop
+        </button>
         <button onClick={resetTimer}>Reset</button>
       </div>
     </div>

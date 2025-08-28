@@ -3,10 +3,31 @@
   margin-top: 1rem;
 }
 
-.timer-display {
-  font-size: 2.5rem;
+.circle-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.progress-ring {
+  transform: rotate(-90deg); /* start progress from top */
+}
+
+.progress-ring__circle--bg {
+  opacity: 0.2;
+}
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 1s linear, stroke 0.5s ease;
+}
+
+.timer-text {
+  position: absolute;
+  font-size: 2rem;
   font-weight: bold;
-  margin: 1rem 0;
+  color: #333;
 }
 
 .timer-buttons button {
