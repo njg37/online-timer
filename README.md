@@ -1,12 +1,57 @@
-# React + Vite
+# ⏱ Online Timer Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Online Timer Tool**, a lightweight and modern React app powered by **Vite**. This tool includes a **Timer**, **Stopwatch**, and **Alarm**, complete with animated UI and theme switching. Your data persists across sessions using `localStorage`.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+👉 [View Deployed Dashboard](https://online-timer-ten.vercel.app/)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- ⏳ **Timer** — Countdown from a set duration
+- ⏱ **Stopwatch** — Start, stop, reset, and record laps
+- ⏰ **Alarm** — Add/delete alarms, persistent via localStorage
+- 🤖 **Onboarding Assistant** — Helps users choose a tool on first load
+- 🌗 **Dark/Light Theme** — Toggle between light and dark mode
+- 💾 **Data Persistence** — Saves alarms, stopwatch state, and theme locally
+- ⚡ Built with **Vite** — Super fast dev & build
+
+---
+
+## 📦 Tech Stack
+
+- **React 19**
+- **Vite** (build tool)
+- **Framer Motion** (animations)
+- **Canvas Confetti** (for celebratory effects)
+- **React Icons**
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/njg37/online-timer.git
+cd online-timer
+
+# Install dependencies
+npm install
+```
+### Development
+```bash
+npm run dev
+# or
+yarn dev
+
+```
+Open http://localhost:5173 in your browser.
