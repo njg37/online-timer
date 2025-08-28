@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import "../styles/timer.css";
+import "../styles/Timer.css";
 
 const LOCAL_STORAGE_KEY = "timerLabels";
 
