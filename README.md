@@ -13,7 +13,6 @@ Welcome to the **Online Timer Tool**, a lightweight and modern React app powered
 - ⏳ **Timer** — Countdown from a set duration
 - ⏱ **Stopwatch** — Start, stop, reset, and record laps
 - ⏰ **Alarm** — Add/delete alarms, persistent via localStorage
-- 🤖 **Onboarding Assistant** — Helps users choose a tool on first load
 - 🌗 **Dark/Light Theme** — Toggle between light and dark mode
 - 💾 **Data Persistence** — Saves alarms, stopwatch state, and theme locally
 - ⚡ Built with **Vite** — Super fast dev & build
@@ -25,7 +24,6 @@ Welcome to the **Online Timer Tool**, a lightweight and modern React app powered
 - **React 19**
 - **Vite** (build tool)
 - **Framer Motion** (animations)
-- **Canvas Confetti** (for celebratory effects)
 - **React Icons**
 
 ---
