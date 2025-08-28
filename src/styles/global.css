@@ -152,3 +152,38 @@ body.dark .nav button.active {
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
+
+
+.assistant-box {
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.bubble {
+  background-color: #f4f4f4;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+}
+
+.choices {
+  margin-top: 1rem;
+}
+
+.choices button {
+  margin: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.choices button:hover {
+  background-color: #0056b3;
+}

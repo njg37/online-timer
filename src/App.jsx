@@ -6,32 +6,39 @@ import Alarm from "./components/Alarm";
 import "./styles/global.css";
 
 function App() {
-  const [view, setView] = useState("timer");
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [view, setView] = useState("");
   const [theme, setTheme] = useState("light");
+  const [showAssistant, setShowAssistant] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(true);
 
-  // Load theme from localStorage on mount
+  // Load theme on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     document.body.classList.add(savedTheme);
   }, []);
 
-  // Apply theme class to body and save to localStorage
+  // Apply theme and save it
   useEffect(() => {
     document.body.classList.remove(theme === "light" ? "dark" : "light");
     document.body.classList.add(theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === "light" ? "dark" : "light"));
-  };
-
+  // Show welcome screen briefly
   useEffect(() => {
     const timer = setTimeout(() => setShowWelcome(false), 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  const handleAssistantChoice = (choice) => {
+    setView(choice.toLowerCase());
+    setShowAssistant(false);
+  };
 
   return (
     <div className="app-container">
@@ -44,6 +51,24 @@ function App() {
         >
           👋 Welcome to Online Timer
         </motion.h1>
+      ) : showAssistant ? (
+        <motion.div
+          className="assistant-box"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="bubble">
+            <p>🤖 Hello! What would you like to use today?</p>
+            <div className="choices">
+              {["Timer", "Stopwatch", "Alarm"].map((option) => (
+                <button key={option} onClick={() => handleAssistantChoice(option)}>
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       ) : (
         <>
           <div className="header">
