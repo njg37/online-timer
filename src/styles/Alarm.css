@@ -1,50 +1,215 @@
-.alarm-container {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-family: "Poppins", sans-serif;
+:root {
+  --light-bg: #ffffff;
+  --light-text: #222;
+  --dark-bg: #1f1f1f;
+  --dark-text: #f0f0f0;
+  --primary: #007bff;
+  --danger: #dc3545;
+  --success: #28a745;
 }
 
-.alarm-buttons {
+body.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+}
+
+body.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.alarm-container {
+  text-align: center;
+  padding: 1rem;
+  max-width: 500px;
+  margin: auto;
+}
+
+.digital-clock {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  animation: pulseTime 1s infinite ease-in-out;
+  font-family: 'Courier New', Courier, monospace;
+  color: inherit;
+}
+
+@keyframes pulseTime {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+.alarm-controls {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-btn,
+.clear-btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: var(--primary);
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover,
+.clear-btn:hover {
+  background-color: #0056b3;
+}
+
+.alarm-list {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.alarm-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(0, 123, 255, 0.08);
+  margin-bottom: 0.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+body.dark .alarm-item {
+  background-color: rgba(0, 123, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.alarm-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.alarm-time {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.alarm-label {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+body.dark .alarm-label {
+  color: #aaa;
+}
+.alarm-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.alarm-actions button {
+  background: transparent; /* no dark color by default */
+  border: none;
+  padding: 0.4rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alarm-actions button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+/* Optional: icon size */
+.alarm-actions svg {
+  font-size: 1.2rem;
+  color: #fff; /* adjust for dark background */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: var(--light-bg);
+  color: var(--light-text);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: background 0.3s ease;
+}
+
+body.dark .modal {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.modal input {
+  margin: 0.6rem 0;
+  padding: 0.5rem;
+  width: 90%;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #000;
+}
+
+body.dark .modal input {
+  background: #2e2e2e;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+.modal-buttons {
   margin-top: 1rem;
 }
 
-.alarm-buttons button {
-  padding: 0.7rem 1.4rem;
+.modal-buttons button {
+  margin: 0.5rem;
+  padding: 0.5rem 1.2rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  background: linear-gradient(135deg, #dc3545, #b02a37);
-  color: white;
-  font-size: 1rem;
   font-weight: 500;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease-in-out;
+  transition: background 0.3s ease;
 }
 
-.alarm-buttons button:hover {
-  background: linear-gradient(135deg, #b02a37, #7a1c25);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+.modal-buttons button:first-child {
+  background-color: var(--success);
+  color: #fff;
 }
 
-.alarm-buttons button:active {
-  transform: translateY(1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+.modal-buttons button:first-child:hover {
+  background-color: #218838;
 }
 
-.alarm-buttons button:focus {
-  outline: 2px solid #ff6b81;
-  outline-offset: 3px;
+.modal-buttons button:last-child {
+  background-color: #ccc;
+  color: #333;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .alarm-buttons button {
-    width: 100%;
-    font-size: 0.95rem;
-  }
+.modal-buttons button:last-child:hover {
+  background-color: #999;
 }

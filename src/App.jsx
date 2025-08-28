@@ -6,16 +6,34 @@ import Alarm from "./components/Alarm";
 import "./styles/global.css";
 
 function App() {
-  const [view, setView] = useState("");
+  const [view, setView] = useState("timer");
   const [theme, setTheme] = useState("light");
   const [showAssistant, setShowAssistant] = useState(true);
   const [showWelcome, setShowWelcome] = useState(true);
 
-  // Load theme on mount
+  // Lifted state for Alarm and Stopwatch
+  const [alarms, setAlarms] = useState([]);
+  const [stopwatchTime, setStopwatchTime] = useState(0);
+  const [stopwatchIsActive, setStopwatchIsActive] = useState(false);
+  const [stopwatchLaps, setStopwatchLaps] = useState([]);
+
+  // Load theme, alarms, stopwatch from localStorage on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     document.body.classList.add(savedTheme);
+
+    const savedAlarms = JSON.parse(localStorage.getItem("alarms")) || [];
+    setAlarms(savedAlarms);
+
+    const savedStopwatch = JSON.parse(localStorage.getItem("stopwatch")) || {
+      time: 0,
+      isActive: false,
+      laps: [],
+    };
+    setStopwatchTime(savedStopwatch.time);
+    setStopwatchIsActive(savedStopwatch.isActive);
+    setStopwatchLaps(savedStopwatch.laps);
   }, []);
 
   // Apply theme and save it
@@ -24,6 +42,23 @@ function App() {
     document.body.classList.add(theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  // Save alarms to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("alarms", JSON.stringify(alarms));
+  }, [alarms]);
+
+  // Save stopwatch state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(
+      "stopwatch",
+      JSON.stringify({
+        time: stopwatchTime,
+        isActive: stopwatchIsActive,
+        laps: stopwatchLaps,
+      })
+    );
+  }, [stopwatchTime, stopwatchIsActive, stopwatchLaps]);
 
   // Show welcome screen briefly
   useEffect(() => {
@@ -101,8 +136,17 @@ function App() {
 
           <div className="view tool-card">
             {view === "timer" && <Timer />}
-            {view === "stopwatch" && <Stopwatch />}
-            {view === "alarm" && <Alarm />}
+            {view === "stopwatch" && (
+              <Stopwatch
+                time={stopwatchTime}
+                setTime={setStopwatchTime}
+                isActive={stopwatchIsActive}
+                setIsActive={setStopwatchIsActive}
+                laps={stopwatchLaps}
+                setLaps={setStopwatchLaps}
+              />
+            )}
+            {view === "alarm" && <Alarm alarms={alarms} setAlarms={setAlarms} />}
           </div>
         </>
       )}

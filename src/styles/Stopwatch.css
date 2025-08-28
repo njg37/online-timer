@@ -1,32 +1,126 @@
 .stopwatch-container {
   text-align: center;
-  margin-top: 1rem;
+  padding: 2rem;
 }
 
-.stopwatch-display {
-  font-size: 2.5rem;
+.stopwatch-time {
+  font-size: 3rem;
+  font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.stopwatch-time.active {
+  color: #28a745;
+  animation: glow 1s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(40, 167, 69, 0.7);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(40, 167, 69, 0.9);
+  }
+}
+
+.stopwatch-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .stopwatch-buttons button {
-  margin: 0.5rem;
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.4rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  background: #28a745;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.start-btn {
+  background-color: #28a745;
   color: white;
-  transition: 0.3s;
 }
 
-.stopwatch-buttons button:hover {
-  background: #1e7e34;
+.stop-btn {
+  background-color: #dc3545;
+  color: white;
 }
 
-.laps {
-  margin-top: 1rem;
+.reset-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.lap-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+/* Laps styling */
+.laps-container {
+  margin-top: 1.5rem;
   text-align: left;
-  max-width: 300px;
-  margin-inline: auto;
+}
+
+.lap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.lap-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background: #f1f1f1;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Dark mode support === */
+body.dark .stopwatch-time {
+  color: #f1f1f1;
+}
+
+body.dark .stopwatch-time.active {
+  color: #71ffb0;
+  text-shadow: 0 0 8px rgba(113, 255, 176, 0.8);
+}
+
+body.dark .lap-item {
+  background: #2a2a40;
+  color: #f1f1f1;
+  box-shadow: 0 2px 6px rgba(255,255,255,0.05);
 }

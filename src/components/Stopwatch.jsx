@@ -1,29 +1,24 @@
-import { useState, useRef, useEffect } from "react";
-import "../styles/Stopwatch.css"
-function Stopwatch() {
-  const [time, setTime] = useState(0); // in ms
-  const [isActive, setIsActive] = useState(false);
-  const [laps, setLaps] = useState([]);
+import { useRef, useEffect } from "react";
+import "../styles/Stopwatch.css";
+
+function Stopwatch({ time, setTime, isActive, setIsActive, laps, setLaps }) {
   const timerRef = useRef(null);
 
-  // Start stopwatch
   const startStopwatch = () => {
     if (!isActive) {
       setIsActive(true);
       const start = Date.now() - time;
       timerRef.current = setInterval(() => {
         setTime(Date.now() - start);
-      }, 10); // update every 10ms
+      }, 10);
     }
   };
 
-  // Stop stopwatch
   const stopStopwatch = () => {
     clearInterval(timerRef.current);
     setIsActive(false);
   };
 
-  // Reset stopwatch
   const resetStopwatch = () => {
     clearInterval(timerRef.current);
     setIsActive(false);
@@ -31,20 +26,24 @@ function Stopwatch() {
     setLaps([]);
   };
 
-  // Add lap
   const addLap = () => {
     if (isActive) {
       setLaps([...laps, time]);
     }
   };
 
-  // Cleanup
   useEffect(() => {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  // Format time → MM:SS:MS
+  // Format time safely and prevent absurdly large values
   const formatTime = (ms) => {
+    if (ms < 0) ms = 0;
+
+    // Maximum time display (e.g., 99:59:99)
+    const maxMs = (99 * 60 + 59) * 1000 + 990; 
+    if (ms > maxMs) ms = maxMs;
+
     const minutes = String(Math.floor(ms / 60000)).padStart(2, "0");
     const seconds = String(Math.floor((ms % 60000) / 1000)).padStart(2, "0");
     const milliseconds = String(Math.floor((ms % 1000) / 10)).padStart(2, "0");
@@ -52,26 +51,38 @@ function Stopwatch() {
   };
 
   return (
-    <div>
+    <div className="stopwatch-container tool-card">
       <h2>⏱ Stopwatch</h2>
-      <h1>{formatTime(time)}</h1>
-
-      <div>
-        <button onClick={startStopwatch} disabled={isActive}>Start</button>
-        <button onClick={stopStopwatch} disabled={!isActive}>Stop</button>
-        <button onClick={resetStopwatch}>Reset</button>
-        <button onClick={addLap} disabled={!isActive}>Lap</button>
+      <div className={`stopwatch-time ${isActive ? "active" : ""}`}>
+        {formatTime(time)}
       </div>
 
-      {/* Laps list */}
+      <div className="stopwatch-buttons">
+        <button className="start-btn" onClick={startStopwatch} disabled={isActive}>
+          Start
+        </button>
+        <button className="stop-btn" onClick={stopStopwatch} disabled={!isActive}>
+          Stop
+        </button>
+        <button className="reset-btn" onClick={resetStopwatch}>
+          Reset
+        </button>
+        <button className="lap-btn" onClick={addLap} disabled={!isActive}>
+          Lap
+        </button>
+      </div>
+
       {laps.length > 0 && (
-        <div style={{ marginTop: "1rem" }}>
+        <div className="laps-container">
           <h3>Laps</h3>
-          <ol>
+          <div className="lap-list">
             {laps.map((lap, i) => (
-              <li key={i}>{formatTime(lap)}</li>
+              <div key={i} className="lap-item">
+                <span>Lap {i + 1}</span>
+                <span>{formatTime(lap)}</span>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       )}
     </div>
